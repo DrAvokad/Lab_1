@@ -2,11 +2,11 @@ import java.awt.*;
 
 public abstract class Car implements Movable {
 
-    private int nrDoors; // Number of doors on the car
-    private double enginePower; // Engine power of the car
+    private final int nrDoors; // Number of doors on the car
+    protected final double enginePower; // Engine power of the car
     protected double currentSpeed; // The current speed of the car
     private Color color; // Color of the car
-    private String modelName;
+    private final String modelName;
     protected int x;
     protected int y;
     protected Direction direction;
@@ -16,29 +16,17 @@ public abstract class Car implements Movable {
     }
 
     /**
-     * metoden är en constructor för att ange alla variabler
-     * @param nrDoors
-     * @param enginePower
-     * @param currentSpeed
-     * @param color
-     * @param modelName
-     * @param x
-     * @param y
-     * @param direction
+     * Metoden är konstruktorn som används för att skapa ett objekt av denna klassen. currentSpeed anges ej utan
+     * initialiseras med värdet 0.
+     * @param nrDoors - Hur många dörrar den skapade bilen har.
+     * @param enginePower - En double som kommer avgöra hur snabbt en bil kan accelerera.
+     * @param color - Den skapade bilens färg. Går att ändra senare med en setter.
+     * @param modelName - Namnet på bilmodellen.
+     * @param x - Bilens nuvarande position i x-led.
+     * @param y - Bilens nuvarande position i y-led.
+     * @param direction - Beroende på vilket värde direction har så kommer det påverka hur bilen förflyttas när move
+     *                  kallas över bilen.
      */
-    public Car(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int x, int y, Direction direction){
-
-        this.nrDoors = nrDoors;
-        this.enginePower = enginePower;
-        this.currentSpeed = currentSpeed;
-        this.color = color;
-        this.modelName = modelName;
-        this.x = x;
-        this.y = y;
-        this.direction = direction;
-    }
-
-
     public Car(int nrDoors, double enginePower, Color color, String modelName, int x, int y, Direction direction){
 
         this.nrDoors = nrDoors;
@@ -52,6 +40,10 @@ public abstract class Car implements Movable {
         this.currentSpeed = 0;
     }
 
+    /**
+     * Förflyttar bilobjektet i x- eller y-led beroende på vilket värde direction har. Hur mycket bilobjektet förflyttas
+     * vid varje kall av move avgörs av värdet på currentSpeed.
+     */
     public void move() {
         if(direction == Direction.FORWARD){
             y = y + (int)currentSpeed;
@@ -64,7 +56,9 @@ public abstract class Car implements Movable {
         }
     }
 
-
+    /**
+     * Ändrar värdet på direction "ett steg åt vänster" från dess nuvarande värde.
+     */
     public void turnLeft() {
         if(direction == Direction.FORWARD){
             direction = Direction.LEFT;
@@ -77,6 +71,9 @@ public abstract class Car implements Movable {
         }
     }
 
+    /**
+     * Ändrar värdet på direction "ett steg åt höger" från dess nuvarande värde.
+     */
     public void turnRight() {
         if(direction == Direction.FORWARD){
             direction = Direction.RIGHT;
@@ -89,13 +86,26 @@ public abstract class Car implements Movable {
         }
     }
 
+    /**
+     * Returnerar antalet dörrar ett bilobjekt har.
+     * @return
+     */
     public int getNrDoors(){
         return nrDoors;
     }
+
+    /**
+     * Returnerar värdet på enginePower hos ett bilobjekt.
+     * @return
+     */
     public double getEnginePower(){
         return enginePower;
     }
 
+    /**
+     * Returnerar värdet på currentSpeed hos ett bilobjekt.
+     * @return
+     */
     public double getCurrentSpeed(){
         return currentSpeed;
     }
