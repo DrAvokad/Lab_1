@@ -99,4 +99,37 @@ public class Testing {
         assertTrue(saab.getCurrentSpeed()== -125);
     }
 
+    @Test
+    public void testSaabTurboOn(){
+        Saab95 saab = new Saab95(0, 0, Car.Direction.BACKWARD);
+        saab.setTurboOn();
+        assertTrue(saab.getTurbo());
+    }
+
+    @Test
+    public void testSaabTurboOff(){
+        Saab95 saab = new Saab95(0, 0, Car.Direction.BACKWARD);
+        saab.setTurboOn();
+        saab.setTurboOff();
+        assertTrue(!saab.getTurbo());
+    }
+
+    @Test
+    public void testSpeedFactorSaabTurboOff(){
+        Saab95 saab = new Saab95(0, 0, Car.Direction.FORWARD);
+        assertTrue(saab.speedFactor() == 1.25);
+    }
+
+    @Test
+    public void testSpeedFactorSaabTurboOn(){
+        Saab95 saab = new Saab95(0, 0, Car.Direction.FORWARD);
+        saab.setTurboOn();
+        assertTrue(saab.speedFactor() == 1.625);
+    }
+
+    @Test
+    public void testSpeedFactorVolvo240(){
+        Volvo240 volvo = new Volvo240(0, 0, Car.Direction.FORWARD);
+        assertTrue(volvo.speedFactor()==1.25);
+    }
 }

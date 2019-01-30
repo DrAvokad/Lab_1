@@ -17,6 +17,18 @@ public class Saab95 extends Car {
 
     }
 
+    public void setTurboOn(){
+        turboOn = true;
+    }
+
+    public void setTurboOff(){
+        turboOn = false;
+    }
+
+    public boolean getTurbo(){
+        return turboOn;
+    }
+
     @Override
     public double speedFactor(){
         double turbo = 1;
@@ -60,15 +72,6 @@ public class Saab95 extends Car {
     public void stopEngine(){
 	    currentSpeed = 0;
     }
-
-    public void setTurboOn(){
-	    turboOn = true;
-    }
-
-    public void setTurboOff(){
-	    turboOn = false;
-    }
-
 
     public void incrementSpeed(double amount){
         currentSpeed = getCurrentSpeed() + speedFactor() * amount;
