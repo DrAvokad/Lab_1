@@ -99,7 +99,4 @@ public class Testing {
         assertTrue(saab.getCurrentSpeed()== -125);
     }
 
-
-
-
 }
