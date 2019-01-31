@@ -132,4 +132,45 @@ public class Testing {
         Volvo240 volvo = new Volvo240(0, 0, Car.Direction.FORWARD);
         assertTrue(volvo.speedFactor()==1.25);
     }
+
+    @Test
+    public void testSetCurrentSpeed(){
+        Saab95 saab = new Saab95(0, 0, Car.Direction.FORWARD);
+        saab.startEngine();
+        saab.setCurrentSpeed(100);
+        assertTrue(saab.getCurrentSpeed()==100);
+        }
+
+    @Test
+    public void testSaab95GasValue1OnceEngineStartedTurboOff(){
+        Saab95 saab = new Saab95(0 ,0 , Car.Direction.FORWARD);
+        saab.startEngine();
+        saab.gas(1);
+        assertTrue(saab.getCurrentSpeed()==1.35);
+        }
+
+    @Test
+    public void testSaab95GasValue1OnceEngineStartedTurboOn(){
+        Saab95 saab = new Saab95(0 ,0 , Car.Direction.FORWARD);
+        saab.startEngine();
+        saab.setTurboOn();
+        saab.gas(1);
+        assertTrue(saab.getCurrentSpeed()==1.725);
+    }
+
+    @Test
+    public void testSaab95GasValueZeroPointFiveOnceEngineStartedTurboOff(){
+        Saab95 saab = new Saab95(0 ,0 , Car.Direction.FORWARD);
+        saab.startEngine();
+        saab.gas(0.5);
+        assertTrue(saab.getCurrentSpeed()==0.725);
+    }
+
+    @Test
+    public void testSaab95GasValue0OnceEngineStartedTurboOff(){
+        Saab95 saab = new Saab95(0 ,0 , Car.Direction.FORWARD);
+        saab.startEngine();
+        saab.gas(0);
+        assertTrue(saab.getCurrentSpeed()==0.1);
+    }
 }

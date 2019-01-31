@@ -110,31 +110,41 @@ public abstract class Car implements Movable {
         return currentSpeed;
     }
 
+    /**
+     * Returnerar den nuvarande färgen på bilobjektet.
+     * @return
+     */
     public Color getColor(){
         return color;
     }
 
+    /**
+     * Ändrar färgen på bilobjektet till en angiven färg.
+     * @param clr - den nya färgen som bilobjektet ska få.
+     */
     public void setColor(Color clr){
         color = clr;
     }
 
+    /**
+     * Sätter bilobjektets currentSpeed till 0.1.
+     */
     public void startEngine(){
         currentSpeed = 0.1;
     }
 
+    /**
+     * Sätter bilobjektets currentSpeed direkt till 0.
+     */
     public void stopEngine(){
         currentSpeed = 0;
     }
 
-    public double speedFactor(){
-        return enginePower * 0.01;
-    }
-
-    public void incrementSpeed(double amount){
-        currentSpeed = getCurrentSpeed() + speedFactor() * amount;
-    }
-
-    public void decrementSpeed(double amount){
-        currentSpeed = getCurrentSpeed() - speedFactor() * amount;
+    /**
+     * Endast för testing.
+     * @param amount
+     */
+    public void setCurrentSpeed(double amount){
+        currentSpeed = amount;
     }
 }

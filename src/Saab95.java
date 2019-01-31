@@ -29,7 +29,6 @@ public class Saab95 extends Car {
         return turboOn;
     }
 
-    @Override
     public double speedFactor(){
         double turbo = 1;
         if(turboOn) turbo = 1.3;
@@ -80,7 +79,50 @@ public class Saab95 extends Car {
     public void decrementSpeed(double amount){
         currentSpeed = getCurrentSpeed() - speedFactor() * amount;
     }
-    */
+
+    /**
+     * Använder sig av värdet man får ut av speedFactor och ett givet värde för att öka bilobjektets currentSpeed.
+     * @param amount Värdet som avgör hur mycket currentSpeed ska öka.
+     */
+
+    public void incrementSpeed(double amount){
+        currentSpeed = getCurrentSpeed() + speedFactor() * amount;
+    }
+
+    /**
+     * Använder sig av värdet man får ut av speedFactor och ett givet värde för att sänka bilobjektets currentSpeed.
+     * @param amount
+     */
+    public void decrementSpeed(double amount){
+        currentSpeed = getCurrentSpeed() - speedFactor() * amount;
+    }
+
+    /**
+     * Använder sig av metoden incrementSpeed och ett angivet värde för att öka bilobjektets currentSpeed. Anges ett
+     * värde mindre än 0 eller större än 1 kommer inte metoden göra något. Kallas metoden och det resulterar i att
+     * currentSpeed blir högre än värdet på enginePower kommer currentSpeed sänkas till värdet av enginePower.
+     * @param amount En double som ska ligga mellan 0 & 1 för att metoden ska göra något. Högre värde resulterar i att
+     *               currentSpeed ökas mer.
+     */
+
+    public void gas(double amount){
+        if (amount < 0) {
+
+        }else if(amount > 1){
+            incrementSpeed(1);
+        }else{
+            incrementSpeed(amount);
+        }
+        if(currentSpeed > enginePower){
+            currentSpeed = enginePower;
+        }
+    }
+
+    public void brake(double amount){
+        
+    }
+
+    /*
     // TODO fix this method according to lab pm
     public void gas(double amount){
         incrementSpeed(amount);
@@ -90,5 +132,5 @@ public class Saab95 extends Car {
     public void brake(double amount){
         decrementSpeed(amount);
     }
-
+*/
 }

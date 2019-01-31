@@ -13,7 +13,6 @@ public class Volvo240 extends Car{
         super(4, 100, Color.black, "Volvo240", x, y, direction);
     }
 
-    @Override
     public double speedFactor(){
         return enginePower * 0.01 * trimFactor;
     }
@@ -65,7 +64,6 @@ public class Volvo240 extends Car{
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
     }
 
-*/
     // TODO fix this method according to lab pm
     public void gas(double amount){
         incrementSpeed(amount);
@@ -75,6 +73,36 @@ public class Volvo240 extends Car{
     public void brake(double amount){
         decrementSpeed(amount);
     }
+*/
+    public void incrementSpeed(double amount){
+        currentSpeed = getCurrentSpeed() + speedFactor() * amount;
+    }
 
+    /**
+     * Använder sig av värdet man får ut av speedFactor och ett givet värde för att sänka bilobjektets currentSpeed.
+     * @param amount
+     */
+    public void decrementSpeed(double amount){
+        currentSpeed = getCurrentSpeed() - speedFactor() * amount;
+    }
+
+    /**
+     * Använder sig av metoden incrementSpeed och ett angivet värde för att öka bilobjektets currentSpeed. Anges ett
+     * värde mindre än 0 eller större än 1 kommer inte metoden göra något. Kallas metoden och det resulterar i att
+     * currentSpeed blir högre än värdet på enginePower kommer currentSpeed sänkas till värdet av enginePower.
+     * @param amount En double som ska ligga mellan 0 & 1 för att metoden ska göra något. Högre värde resulterar i att
+     *               currentSpeed ökas mer.
+     */
+
+    public void gas(double amount){
+        if (amount < 0 || amount > 1){
+
+        }else{
+            incrementSpeed(amount);
+        }
+        if(currentSpeed > enginePower){
+            currentSpeed = enginePower;
+        }
+    }
 
 }
