@@ -12,7 +12,7 @@ public abstract class Car implements Movable {
     protected Direction direction;
 
     protected enum Direction {
-        FORWARD, BACKWARD, LEFT, RIGHT
+        NORTH, SOUTH, WEST, EAST
     }
 
     /**
@@ -45,13 +45,13 @@ public abstract class Car implements Movable {
      * vid varje kall av move avgörs av värdet på currentSpeed.
      */
     public void move() {
-        if(direction == Direction.FORWARD){
-            y = y + (int)currentSpeed;
-        }else if(direction == Direction.BACKWARD){
+        if(direction == Direction.NORTH){
             y = y - (int)currentSpeed;
-        }else if (direction == Direction.RIGHT){
+        }else if(direction == Direction.SOUTH){
+            y = y + (int)currentSpeed;
+        }else if (direction == Direction.EAST){
             x = x + (int)currentSpeed;
-        }else if (direction == Direction.LEFT){
+        }else if (direction == Direction.WEST){
             x = x - (int)currentSpeed;
         }
     }
@@ -60,14 +60,14 @@ public abstract class Car implements Movable {
      * Ändrar värdet på direction "ett steg åt vänster" från dess nuvarande värde.
      */
     public void turnLeft() {
-        if(direction == Direction.FORWARD){
-            direction = Direction.LEFT;
-        }else if(direction == Direction.BACKWARD){
-            direction = Direction.RIGHT;
-        }else if (direction == Direction.RIGHT){
-            direction = Direction.FORWARD;
-        }else if (direction == Direction.LEFT){
-            direction = Direction.BACKWARD;
+        if(direction == Direction.NORTH){
+            direction = Direction.WEST;
+        }else if(direction == Direction.SOUTH){
+            direction = Direction.EAST;
+        }else if (direction == Direction.EAST){
+            direction = Direction.NORTH;
+        }else if (direction == Direction.WEST){
+            direction = Direction.SOUTH;
         }
     }
 
@@ -75,15 +75,31 @@ public abstract class Car implements Movable {
      * Ändrar värdet på direction "ett steg åt höger" från dess nuvarande värde.
      */
     public void turnRight() {
-        if(direction == Direction.FORWARD){
-            direction = Direction.RIGHT;
-        }else if(direction == Direction.BACKWARD){
-            direction = Direction.LEFT;
-        }else if (direction == Direction.RIGHT){
-            direction = Direction.BACKWARD;
-        }else if (direction == Direction.LEFT) {
-            direction = Direction.FORWARD;
+        if(direction == Direction.NORTH){
+            direction = Direction.EAST;
+        }else if(direction == Direction.SOUTH){
+            direction = Direction.WEST;
+        }else if (direction == Direction.EAST){
+            direction = Direction.SOUTH;
+        }else if (direction == Direction.WEST) {
+            direction = Direction.NORTH;
         }
+    }
+
+    /**
+     * Getter för bilobjektets position i x-led.
+     * @return
+     */
+    public int getX(){
+        return this.x;
+    }
+
+    /**
+     * Getter för bilobjektets position i y-led.
+     * @return
+     */
+    public int getY(){
+        return this.y;
     }
 
     /**
@@ -119,14 +135,6 @@ public abstract class Car implements Movable {
     }
 
     /**
-     * Ändrar färgen på bilobjektet till en angiven färg.
-     * @param clr - den nya färgen som bilobjektet ska få.
-     */
-    public void setColor(Color clr){
-        color = clr;
-    }
-
-    /**
      * Sätter bilobjektets currentSpeed till 0.1.
      */
     public void startEngine(){
@@ -144,7 +152,73 @@ public abstract class Car implements Movable {
      * Endast för testing.
      * @param amount
      */
+
     public void setCurrentSpeed(double amount){
         currentSpeed = amount;
+    }
+
+    abstract double speedFactor();
+
+    private void incrementSpeed(double amount){
+        currentSpeed = getCurrentSpeed() + speedFactor() * amount;
+    }
+
+    /**
+     * Använder sig av värdet man får ut av speedFactor och ett givet värde för att sänka Volvo240-objektets
+     * currentSpeed.
+     * @param amount
+     */
+
+    private void decrementSpeed(double amount){
+        currentSpeed = getCurrentSpeed() - speedFactor() * amount;
+    }
+
+    /**
+     * Använder sig av metoden incrementSpeed och ett angivet värde för att öka bilobjektets currentSpeed. Anges ett
+     * värde mindre än 0 eller större än 1 kommer inte metoden göra något. Kallas metoden och det resulterar i att
+     * currentSpeed blir högre än värdet på enginePower kommer currentSpeed sänkas till värdet av enginePower.
+     * @param amount En double som ska ligga mellan 0 & 1 för att metoden ska göra något. Högre värde resulterar i att
+     *               currentSpeed ökas mer.
+     */
+
+    /**
+     * Använder sig av metoden incrementSpeed och ett angivet värde för att öka bilobjektets currentSpeed. Anges ett
+     * värde mindre än 0 eller större än 1 kommer inte metoden göra något. Kallas metoden och det resulterar i att
+     * currentSpeed blir högre än värdet på enginePower kommer currentSpeed sänkas till värdet av enginePower.
+     * @param amount En double som ska ligga mellan 0 & 1 för att metoden ska göra något. Högre värde resulterar i att
+     *               currentSpeed ökas mer.
+     */
+
+    public void gas(double amount){
+        if (amount < 0 || amount > 1){
+
+        }else{
+            incrementSpeed(amount);
+        }
+        if(currentSpeed > enginePower){
+            currentSpeed = enginePower;
+        }
+    }
+
+    /**
+     * Använder sig av metoden decrementSpeed och ett angivet värde för att sänka bilobjektets currentSpeed. Anges ett
+     * värde mindre än 0 kommer det tolkas som 0.  Anges ett värde högre än 1 kommer det tolkas som 1. Kallas metoden
+     * och det resulterar i att currentSpeed blir högre än värdet på enginePower kommer currentSpeed sänkas till värdet
+     * av enginePower.
+     * @param amount En double som ska ligga mellan 0 & 1 för att metoden ska göra något. Högre värde resulterar i att
+     *               currentSpeed ökas mer.
+     */
+
+    public void brake(double amount){
+        if (amount < 0){
+
+        }else if(amount > 1){
+            decrementSpeed(1);
+        }else{
+            decrementSpeed(amount);
+        }
+        if (currentSpeed < 0){
+            currentSpeed = 0;
+        }
     }
 }
