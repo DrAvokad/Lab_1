@@ -50,22 +50,4 @@ public class Saab95 extends Car implements ISpeedControl{
         return enginePower * 0.01 * turbo;
     }
 
-    /**
-     * Använder sig av värdet man får ut av speedFactor och ett givet värde för att öka Saab95-objektets currentSpeed.
-     * @param amount
-     */
-
-    private void incrementSpeed(double amount){
-        currentSpeed = getCurrentSpeed() + speedFactor() * amount;
-    }
-
-    /**
-     * Använder sig av värdet man får ut av speedFactor och ett givet värde för att sänka Saab95-objektets currentSpeed.
-     * @param amount
-     */
-
-    private void decrementSpeed(double amount){
-        currentSpeed = getCurrentSpeed() - speedFactor() * amount;
-    }
-
 }
