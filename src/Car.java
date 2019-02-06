@@ -10,6 +10,7 @@ public abstract class Car implements Movable {
     protected int x;
     protected int y;
     protected Direction direction;
+    protected boolean engineOn;
 
     protected enum Direction {
         NORTH, SOUTH, WEST, EAST
@@ -38,6 +39,7 @@ public abstract class Car implements Movable {
         this.direction = direction;
 
         this.currentSpeed = 0;
+        this.engineOn = false;
     }
 
     /**
@@ -139,6 +141,11 @@ public abstract class Car implements Movable {
      */
     public void startEngine(){
         currentSpeed = 0.1;
+        engineOn = true;
+    }
+
+    public boolean getEngineOn(){
+        return engineOn;
     }
 
     /**
@@ -190,7 +197,7 @@ public abstract class Car implements Movable {
      */
 
     public void gas(double amount){
-        if (amount < 0 || amount > 1){
+        if ((amount < 0 || amount > 1) && engineOn){
 
         }else{
             incrementSpeed(amount);

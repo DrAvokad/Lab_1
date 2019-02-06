@@ -255,4 +255,62 @@ public class Testing {
         volvo.move();
         assertTrue(volvo.getX()==10);
     }
+
+    //----------Part II----------
+
+    //Scania
+
+    @Test
+    public void testScaniaTiltLoadingPlatform(){
+        Scania scania = new Scania(0, 0, Car.Direction.NORTH);
+        scania.tiltLoadingPlatform(1);
+        assertTrue(scania.getLoadingPlatformAngle()==10);
+    }
+
+    @Test
+    public void testScaniaTiltLoadingPlatformWhileMoving(){
+        Scania scania = new Scania(0, 0, Car.Direction.NORTH);
+        scania.startEngine();
+        scania.gas(10);
+        scania.tiltLoadingPlatform(1);
+        assertTrue(scania.getLoadingPlatformAngle()==0);
+    }
+
+    @Test
+    public void testScaniaStartEngineWithLoadingPlatformAngleNotAtZero(){
+        Scania scania = new Scania(0,0, Car.Direction.NORTH);
+        scania.tiltLoadingPlatform(1);
+        scania.startEngine();
+        assertFalse(scania.getEngineOn());
+    }
+
+    @Test
+    public void testScaniaGasAfterLoadingPlatformRaised(){
+        Scania scania = new Scania(0, 0, Car.Direction.NORTH);
+        scania.tiltLoadingPlatform(1);
+        scania.tiltLoadingPlatform(-1);
+        scania.tiltLoadingPlatform(-1);
+        scania.startEngine();
+        scania.gas(1);
+        assertTrue(scania.getCurrentSpeed()==1);
+    }
+
+    @Test
+    public void testScaniaMaxLoadingPlatformAngle(){
+        Scania scania = new Scania(0,0, Car.Direction.NORTH);
+        for (int i = 0; i < 10; i++){
+            scania.tiltLoadingPlatform(1);
+        }
+        assertTrue(scania.getLoadingPlatformAngle()==70);
+    }
+
+    @Test
+    public void testScaniaMinLoadingPlatformAngle(){
+        Scania scania = new Scania(0,0, Car.Direction.NORTH);
+        for (int i = 0; i < 10; i++){
+            scania.tiltLoadingPlatform(-1);
+        }
+        assertTrue(scania.getLoadingPlatformAngle()==0);
+    }
 }
+
