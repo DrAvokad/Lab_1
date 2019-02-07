@@ -1,10 +1,10 @@
 import java.awt.*;
 
-public class Scania extends Car{
+public class Scania_old extends Car{
 
     private double loadingPlatformAngle;
 
-    public Scania (int x, int y, Direction direction){
+    public Scania_old (int x, int y, Direction direction){
         super(2,300, Color.blue,"Scania",x,y, direction);
 
         loadingPlatformAngle = 0;

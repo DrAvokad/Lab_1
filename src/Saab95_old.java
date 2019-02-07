@@ -2,13 +2,13 @@ import com.sun.javafx.scene.traversal.Direction;
 
 import java.awt.*;
 
-public class Saab95 extends Car implements ISpeedControl{
+public class Saab95_old extends Car implements ISpeedControl{
 
     private boolean turboOn;
 
     //----------Constructor----------
 
-    public Saab95(int x, int y, Direction direction){
+    public Saab95_old(int x, int y, Direction direction){
         super(2,125, Color.red,"Saab95",x,y, direction);
         turboOn = false;
 

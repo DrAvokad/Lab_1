@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 
 public class Testing {
 
+    /*
     @Test
     public void testSaab95getNrDoors(){
         Saab95 saab = new Saab95(0, 0, Car.Direction.NORTH);
@@ -63,6 +64,7 @@ public class Testing {
         assertTrue(volvo240.getColor()== Color.pink );
     }
     */
+    /*
 
     @Test
     public void testSaabStartEngine(){
@@ -96,7 +98,7 @@ public class Testing {
         assertTrue(saab.getCurrentSpeed()== -125);
     }
 */
-
+/*
     @Test
     public void testSaabTurboOn(){
         Saab95 saab = new Saab95(0, 0, Car.Direction.SOUTH);
@@ -312,5 +314,6 @@ public class Testing {
         }
         assertTrue(scania.getLoadingPlatformAngle()==0);
     }
+    */
 }
 
