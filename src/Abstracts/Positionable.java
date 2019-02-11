@@ -1,16 +1,14 @@
 package Abstracts;
 
-public abstract class Positionable {
+public class Positionable implements IPositionable{
 
     private double x;
     private double y;
-    private final double size;
 
-    public Positionable(double x, double y, double size){
+    public Positionable(double x, double y){
 
         this.x = x;
         this.y = y;
-        this.size = size;
 
     }
 
@@ -18,25 +16,25 @@ public abstract class Positionable {
 
     //----------Getters----------
 
+    @Override
     public double getX(){
         return this.x;
     }
 
+    @Override
     public double getY(){
         return this.y;
     }
 
-    public double getSize(){
-        return this.size;
-    }
-
     //----------Setters----------
 
-    protected void setX(double x){
+    @Override
+    public void setX(double x){
         this.x = x;
     }
 
-    protected void setY(double y){
+    @Override
+    public void setY(double y){
         this.y = y;
     }
 

@@ -1,26 +1,25 @@
 package Vehicles;
 
-import Abstracts.Movable;
+import Abstracts.*;
 import Machine.Engine;
 
 import java.awt.*;
 
-public abstract class Vehicle extends Movable {
+public class Vehicle {
 
     private final String modelName;
     private Color color;
 
-    public Vehicle(double x, double y, double size, Direction direction, Color color, String modelName) {
-        super(x, y, size, direction);
+    public Vehicle(Color color, String modelName) {
 
-        this.color = color;
         this.modelName = modelName;
+        this.color = color;
 
     }
 
     //----------Methods----------
 
-    abstract double speedFactor();
+    //abstract double speedFactor();
 
     //----------Getters----------
 

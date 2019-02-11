@@ -1,17 +1,14 @@
 package Abstracts;
 
-public abstract class Movable extends Positionable {
+public class Movable implements IDirection {
 
+    private Positionable position;
     private Direction direction;
     private double currentSpeed;
 
-    public enum Direction {
-        NORTH, SOUTH, WEST, EAST
-    }
+    public Movable(double x, double y, Direction direction) {
 
-    public Movable(double x, double y, double size, Direction direction) {
-        super(x, y, size);
-
+        this.position = new Positionable(x, y);
         this.direction = direction;
 
     }
@@ -26,7 +23,7 @@ public abstract class Movable extends Positionable {
 
     //----------Setters----------
 
-    protected void setCurrentSpeed(double speed){
+    public void setCurrentSpeed(double speed){
         this.currentSpeed = speed;
     }
 
@@ -34,13 +31,13 @@ public abstract class Movable extends Positionable {
 
     public void move() {
         if(direction == Direction.NORTH){
-            setY(getY() - currentSpeed);
+            position.setY(position.getY() - currentSpeed);
         }else if(direction == Direction.SOUTH){
-            setY(getY() + currentSpeed);
+            position.setY(position.getY() + currentSpeed);
         }else if (direction == Direction.EAST){
-            setX(getX() + currentSpeed);
+            position.setX(position.getX() + currentSpeed);
         }else if (direction == Direction.WEST){
-            setX(getX() - currentSpeed);
+            position.setX(position.getX() - currentSpeed);
         }
     }
 

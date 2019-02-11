@@ -1,26 +1,31 @@
 package Vehicles;
 
+import Abstracts.IDirection;
+import Abstracts.Movable;
 import Machine.Engine;
 import Machine.ITransportable;
 import Vehicles.ICar;
 import Vehicles.Vehicle;
 
 import java.awt.*;
-
-public class Saab95 extends Vehicle implements ITransportable, ICar {
+//extends Vehicle?
+public class Saab95 implements IDirection, ITransportable, ICar {
 
     private final int nrDoors = 2;
     private Engine engine = new Engine(125);
     private boolean turboOn = false;
+    private Vehicle vehicle;
+    private Movable movable;
+
 
     public Saab95(double x, double y, Direction direction) {
-        super(x, y, 10, direction, Color.RED, "Saab95");
 
+        this.movable = new Movable(x, y, direction);
+        this.vehicle = new Vehicle(Color.RED, "Saab95");
     }
 
     //----------Methods----------
 
-    @Override
     public double speedFactor(){
         double turbo = 1;
         if(turboOn) turbo = 1.3;
@@ -29,23 +34,23 @@ public class Saab95 extends Vehicle implements ITransportable, ICar {
 
     @Override
     public void gas(double amount) {
-        setCurrentSpeed(engine.gas(amount, getCurrentSpeed(), speedFactor()));
+        movable.setCurrentSpeed(engine.gas(amount, movable.getCurrentSpeed(), speedFactor()));
     }
 
     @Override
     public void brake(double amount) {
-        setCurrentSpeed(engine.brake(amount, getCurrentSpeed(), speedFactor()));
+        movable.setCurrentSpeed(engine.brake(amount, movable.getCurrentSpeed(), speedFactor()));
     }
 
     @Override
     public void startEngine() {
-        setCurrentSpeed(engine.startEngine());
+        movable.setCurrentSpeed(engine.startEngine());
 
     }
 
     @Override
     public void stopEngine() {
-        setCurrentSpeed(engine.stopEngine());
+        movable.setCurrentSpeed(engine.stopEngine());
     }
 
     @Override
@@ -63,7 +68,5 @@ public class Saab95 extends Vehicle implements ITransportable, ICar {
 
     @Override
     public void isTransported(double x, double y) {
-        setX(x);
-        setY(y);
-    }
+
 }
