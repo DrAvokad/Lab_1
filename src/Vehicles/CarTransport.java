@@ -22,7 +22,7 @@ public class CarTransport implements IDirection, ITransportable, ICarCarrier, IT
 
         this.movable = new Movable(x, y, direction);
         this.vehicle = new Vehicle(Color.BLACK, "CarTransport");
-        this.loadingPlatform = new Loadable<>(8, 10, false, new ArrayList<ICar>());
+        this.loadingPlatform = new Loadable<>(8, 10, false, new ArrayList<>());
     }
 
     double speedFactor() {

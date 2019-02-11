@@ -25,7 +25,7 @@ public class Scania implements IDirection, ITransportable, ITruck {
 
     //----------Methods----------
 
-    double speedFactor() {
+    public double speedFactor() {
         return engine.getEnginePower() * 0.003;
     }
 
@@ -55,7 +55,7 @@ public class Scania implements IDirection, ITransportable, ITruck {
 
     @Override
     public int getDoors() {
-        return 0;
+        return nrDoors;
     }
 
     @Override

@@ -14,10 +14,10 @@ public class Workshop<T extends ICar> implements IBuilding {
     private Loadable<T> workarea;
     private String name;
 
-    public Workshop (double x, double y, int capacity, ArrayList type, String name){
+    public Workshop (double x, double y, int capacity, ArrayList<T> type, String name){
 
         this.position = new Positionable(x, y);
-        this.workarea = new Loadable(capacity, 10, true, type);
+        this.workarea = new Loadable<T>(capacity, 10, true, type);
         this.name = name;
     }
 
