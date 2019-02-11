@@ -1,23 +1,30 @@
 package Vehicles;
 
+import Abstracts.IDirection;
+import Abstracts.Movable;
 import Machine.Engine;
 import Machine.ITransportable;
 
 import java.awt.*;
 
-public class Scania extends Vehicle implements ITransportable, ITruck {
+public class Scania implements IDirection, ITransportable, ITruck {
 
     private Engine engine = new Engine(300);
     private final int nrDoors = 2;
     private double flatBedAngle = 0;
+    private Movable movable;
+    private Vehicle vehicle;
 
     public Scania(double x, double y, Direction direction) {
-        super(x, y, 50, direction, Color.BLUE, "Scania");
+
+        this.movable = new Movable(x, y, direction);
+        this.vehicle = new Vehicle(Color.BLUE, "Scania");
+
     }
+
 
     //----------Methods----------
 
-    @Override
     double speedFactor() {
         return engine.getEnginePower() * 0.003;
     }
@@ -25,25 +32,25 @@ public class Scania extends Vehicle implements ITransportable, ITruck {
     @Override
     public void gas(double amount) {
         if(flatBedAngle == 0){
-            setCurrentSpeed(engine.gas(amount, getCurrentSpeed(), speedFactor()));
+            movable.setCurrentSpeed(engine.gas(amount, movable.getCurrentSpeed(), speedFactor()));
         }
     }
 
     @Override
     public void brake(double amount) {
-        setCurrentSpeed(engine.brake(amount, getCurrentSpeed(), speedFactor()));
+        movable.setCurrentSpeed(engine.brake(amount, movable.getCurrentSpeed(), speedFactor()));
     }
 
     @Override
     public void startEngine() {
         if(flatBedAngle == 0){
-            setCurrentSpeed(engine.startEngine());
+            movable.setCurrentSpeed(engine.startEngine());
         }
     }
 
     @Override
     public void stopEngine() {
-        setCurrentSpeed(engine.stopEngine());
+        movable.setCurrentSpeed(engine.stopEngine());
     }
 
     @Override
@@ -52,7 +59,7 @@ public class Scania extends Vehicle implements ITransportable, ITruck {
     }
 
     public void tiltLoadingPlatform (double amount) {
-        if(getCurrentSpeed() == 0) {
+        if(movable.getCurrentSpeed() == 0) {
 
             if (amount > 1) {
                 amount = 1;
@@ -68,4 +75,15 @@ public class Scania extends Vehicle implements ITransportable, ITruck {
             }
         }
     }
+
+    @Override
+    public void transport(Movable newMovable) {
+        movable = newMovable;
+    }
+
+    @Override
+    public void exitTransport(){
+        movable = new Movable(movable.getX(), movable.getY(), Direction.SOUTH);
+    }
+
 }

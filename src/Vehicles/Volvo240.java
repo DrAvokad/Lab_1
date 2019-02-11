@@ -1,45 +1,51 @@
 package Vehicles;
 
+import Abstracts.IDirection;
+import Abstracts.Movable;
 import Machine.Engine;
 import Machine.ITransportable;
 
 import java.awt.*;
 
-public class Volvo240 extends Vehicle implements ITransportable, ICar {
+public class Volvo240 implements IDirection, ITransportable, ICar {
 
     private final int nrDoors = 4;
     private Engine engine = new Engine(100);
     private final static double trimFactor = 1.25;
+    private Movable movable;
+    private Vehicle vehicle;
 
     public Volvo240(double x, double y, Direction direction) {
-        super(x, y, 12, direction, Color.BLACK, "Volvo240");
+
+        this.movable = new Movable(x, y, direction);
+        this.vehicle = new Vehicle(Color.BLACK, "Volvo240");
+
     }
 
     //----------Methods----------
 
-    @Override
     public double speedFactor(){
         return engine.getEnginePower() * 0.01 * trimFactor;
     }
 
     @Override
     public void gas(double amount) {
-        setCurrentSpeed(engine.gas(amount, getCurrentSpeed(), speedFactor()));
+        movable.setCurrentSpeed(engine.gas(amount, movable.getCurrentSpeed(), speedFactor()));
     }
 
     @Override
     public void brake(double amount) {
-        setCurrentSpeed(engine.brake(amount, getCurrentSpeed(), speedFactor()));
+        movable.setCurrentSpeed(engine.brake(amount, movable.getCurrentSpeed(), speedFactor()));
     }
 
     @Override
     public void startEngine() {
-        setCurrentSpeed(engine.startEngine());
+        movable.setCurrentSpeed(engine.startEngine());
     }
 
     @Override
     public void stopEngine() {
-        setCurrentSpeed(engine.stopEngine());
+        movable.setCurrentSpeed(engine.stopEngine());
     }
 
     @Override
@@ -48,8 +54,12 @@ public class Volvo240 extends Vehicle implements ITransportable, ICar {
     }
 
     @Override
-    public void isTransported(double x, double y) {
-        setX(x);
-        setY(y);
+    public void transport(Movable newMovable) {
+        movable = newMovable;
+    }
+
+    @Override
+    public void exitTransport(){
+        movable = new Movable(movable.getX(), movable.getY(), Direction.SOUTH);
     }
 }

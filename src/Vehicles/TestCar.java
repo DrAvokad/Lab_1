@@ -5,9 +5,9 @@ import Abstracts.Movable;
 
 import java.awt.*;
 
-public class TestCar extends Vehicle {
+public class TestCar {
 
-    Engine testEngine = new Engine(100);
+/*    Engine testEngine = new Engine(100);
 
 
 
@@ -38,5 +38,5 @@ public class TestCar extends Vehicle {
     @Override
     double speedFactor() {
         return 0;
-    }
+    }*/
 }

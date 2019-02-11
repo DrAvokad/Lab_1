@@ -64,4 +64,12 @@ public class Movable implements IDirection {
             direction = Direction.NORTH;
         }
     }
+
+    public double getX(){
+        return position.getX();
+    }
+
+    public double getY(){
+        return position.getY();
+    }
 }

@@ -1,5 +1,7 @@
 package Machine;
 
+import Abstracts.Movable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,12 +14,11 @@ public class Loadable<T extends ITransportable>{
     private boolean isOpen;
     private boolean fiFo;
 
-    public Loadable (double sizeCap, int slots, double range, boolean fiFo){
+    public Loadable (int slots, double range, boolean fiFo, ArrayList<T> type){
 
-        this.sizeCap = sizeCap;
         this.slots = slots;
         this.range = range;
-        this.load = new ArrayList(slots);
+        this.load = type;
         this.isOpen = false;
         this.fiFo = fiFo;
 
@@ -37,6 +38,10 @@ public class Loadable<T extends ITransportable>{
 
     public int getCurrentLoad() { return load.size(); }
 
+    public boolean isOpen(){
+        return isOpen;
+    }
+
     //----------Setters----------
 
     public void setFiFo(boolean ToF){
@@ -53,8 +58,15 @@ public class Loadable<T extends ITransportable>{
         isOpen = false;
     }
 
-    public void load(T cargo, double size, double x, double y){
-        if(!isFull() && size < sizeCap && isOpen && inRange(x, y)){
+    public void load(T cargo, Movable movable, double x, double y){
+        if(!isFull() && isOpen && inRange(x, y)){
+            cargo.transport(movable);
+            load.add(cargo);
+        }
+    }
+
+    public void load(T cargo, double x, double y){
+        if(!isFull() && isOpen && inRange(x, y)){
             load.add(cargo);
         }
     }
@@ -68,11 +80,8 @@ public class Loadable<T extends ITransportable>{
             cargo = load.get(load.size()-1);
             load.remove(load.size());
         }
+        cargo.exitTransport();
         return cargo;
-    }
-
-    public void transport (ITransportable cargo, ITransport t){
-        cargo.isTransported(t.getX(), t.getY());
     }
 
     //----------Helper Methods----------
@@ -83,6 +92,10 @@ public class Loadable<T extends ITransportable>{
 
     private boolean inRange(double x, double y){
         return (Math.abs(x) <= range && Math.abs(y) <= range);
+    }
+
+    private void transport(ITransportable cargo, Movable movable){
+        cargo.transport(movable);
     }
 
 

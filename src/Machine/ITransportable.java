@@ -1,8 +1,8 @@
 package Machine;
 
+import Abstracts.Movable;
+
 public interface ITransportable {
-
-    void isTransported (double x, double y);
-
-
+    void transport(Movable newMovable);
+    void exitTransport();
 }
