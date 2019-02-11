@@ -2,6 +2,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -255,4 +257,48 @@ public class Testing {
         volvo.move();
         assertTrue(volvo.getX()==10);
     }
+
+    @Test
+    public void testAddVolvoCarToCarGarage(){
+        Volvo240 volvo = new Volvo240(0,0, Car.Direction.EAST);
+        Garage<Car> garage = new Garage(2, new ArrayList<Car>());
+        garage.addCar(volvo);
+        assertTrue(garage.getCar(0).equals(volvo));
+    }
+
+    @Test
+    public void testAddVolvoCarToVolvoGarage(){
+        Volvo240 volvo = new Volvo240(0,0, Car.Direction.EAST);
+        Garage<Volvo240> garage = new Garage(2, new ArrayList<Volvo240>());
+        garage.addCar(volvo);
+        assertTrue(garage.getCar(0).equals(volvo));
+    }
+/*
+    @Test
+    public void testAddVolvoCarToSaabGarage(){
+        Volvo240 volvo = new Volvo240(0,0, Car.Direction.EAST);
+        Garage<Saab95> garage = new Garage(2, new ArrayList<Saab95>());
+        garage.addCar(volvo);
+        assertTrue(garage.getCar(0).equals(volvo));
+    }
+*/
+
+    @Test
+    public void testAddCarToFullGarage(){
+        Volvo240 volvo = new Volvo240(0,0, Car.Direction.EAST);
+        Saab95 saab = new Saab95(0,0, Car.Direction.EAST);
+        Garage<Car> garage = new Garage(1, new ArrayList<Car>());
+        garage.addCar(volvo);
+        garage.addCar(saab);
+        assertTrue(garage.cars.size() == 1);
+    }
+
+    @Test
+    public void testGetCarInformation(){
+        Volvo240 volvo = new Volvo240(0,0, Car.Direction.EAST);
+        Garage<Volvo240> garage = new Garage(1, new ArrayList<Volvo240>());
+        garage.addCar(volvo);
+        assertTrue(garage.getCar(0) == );
+    }
+
 }

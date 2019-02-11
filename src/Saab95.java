@@ -43,29 +43,12 @@ public class Saab95 extends Car implements ISpeedControl{
      * att avgöra hur mycket currentSpeed ska ändras när man kallar på metoden gas eller brake.
      * @return
      */
+
     @Override
     public double speedFactor(){
         double turbo = 1;
         if(turboOn) turbo = 1.3;
         return enginePower * 0.01 * turbo;
-    }
-
-    /**
-     * Använder sig av värdet man får ut av speedFactor och ett givet värde för att öka Saab95-objektets currentSpeed.
-     * @param amount
-     */
-
-    private void incrementSpeed(double amount){
-        currentSpeed = getCurrentSpeed() + speedFactor() * amount;
-    }
-
-    /**
-     * Använder sig av värdet man får ut av speedFactor och ett givet värde för att sänka Saab95-objektets currentSpeed.
-     * @param amount
-     */
-
-    private void decrementSpeed(double amount){
-        currentSpeed = getCurrentSpeed() - speedFactor() * amount;
     }
 
 }

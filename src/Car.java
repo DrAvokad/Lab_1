@@ -45,6 +45,7 @@ public abstract class Car implements Movable {
      * vid varje kall av move avgörs av värdet på currentSpeed.
      */
     public void move() {
+
         if(direction == Direction.NORTH){
             y = y - (int)currentSpeed;
         }else if(direction == Direction.SOUTH){
