@@ -46,4 +46,10 @@ public class Volvo240 extends Vehicle implements ITransportable, ICar {
     public int getNrDoors() {
         return nrDoors;
     }
+
+    @Override
+    public void isTransported(double x, double y) {
+        setX(x);
+        setY(y);
+    }
 }

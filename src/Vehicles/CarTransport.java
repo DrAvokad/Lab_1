@@ -25,4 +25,9 @@ public class CarTransport extends Vehicle implements ITransportable, ITransport 
     public ITransportable unload() {
         return null;
     }
+
+    @Override
+    public void isTransported(double x, double y) {
+
+    }
 }

@@ -16,7 +16,7 @@ public class TestCar extends Vehicle {
     private double speedFactor = testEngine.getEnginePower() * 0.01;
 
     public TestCar(double x, double y, double size, Direction direction, Color color) {
-        super(x, y, size, direction, color);
+        super(x, y, size, direction, color, "TestCar");
     }
 
     public void startEngine(double currentSpeed){

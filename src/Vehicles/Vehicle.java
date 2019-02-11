@@ -27,4 +27,6 @@ public abstract class Vehicle extends Movable {
     public Color getColor() {
         return color;
     }
+
+    public String getModelName(){ return  modelName; }
 }

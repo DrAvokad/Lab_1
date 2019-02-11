@@ -61,4 +61,9 @@ public class Saab95 extends Vehicle implements ITransportable, ICar {
         turboOn = false;
     }
 
+    @Override
+    public void isTransported(double x, double y) {
+        setX(x);
+        setY(y);
+    }
 }
