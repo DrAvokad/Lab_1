@@ -80,10 +80,12 @@ public class Volvo240 implements IDirection, ITransportable, ICar {
 
     //----------Testing----------
 
+    @Override
     public double getX(){
         return movable.getX();
     }
 
+    @Override
     public double getY(){
         return movable.getY();
     }

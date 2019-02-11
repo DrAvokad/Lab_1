@@ -22,7 +22,7 @@ public class Workshop<T extends ICar> implements IBuilding {
     }
 
     public void load(T cargo) {
-        workarea.load(cargo, position.getX(), position.getY());
+        workarea.load(cargo, position.getX(), position.getY(), cargo.getX(), cargo.getY());
     }
 
     public T unload() {

@@ -8,7 +8,6 @@ import java.util.List;
 
 public class Loadable<T extends ITransportable>{
 
-    private double sizeCap;
     private final int slots;
     private double range;
     private ArrayList<T> load;
@@ -28,10 +27,6 @@ public class Loadable<T extends ITransportable>{
     //----------Methods----------
 
     //----------Getters----------
-
-    public double getSizeCap(){
-        return this.sizeCap;
-    }
 
     public double getSlots(){
         return this.slots;
@@ -67,15 +62,15 @@ public class Loadable<T extends ITransportable>{
         isOpen = false;
     }
 
-    public void load(T cargo, Movable movable, double x, double y){
-        if(!isFull() && isOpen && inRange(x, y)){
+    public void load(T cargo, Movable movable, double x, double y, double x2, double y2){
+        if(!isFull() && isOpen && inRange(x, y, x2, y2)){
             cargo.transport(movable);
             load.add(cargo);
         }
     }
 
-    public void load(T cargo, double x, double y){
-        if(!isFull() && isOpen && inRange(x, y)){
+    public void load(T cargo, double x, double y, double x2, double y2){
+        if(!isFull() && isOpen && inRange(x, y, x2, y2)){
             load.add(cargo);
         }
     }
@@ -99,8 +94,8 @@ public class Loadable<T extends ITransportable>{
         return load.size()==slots;
     }
 
-    private boolean inRange(double x, double y){
-        return (Math.abs(x) <= range && Math.abs(y) <= range);
+    private boolean inRange(double x, double y, double x2, double y2){
+        return (x2 <= x+range && y2 <= y+range);
     }
 
     private void transport(ITransportable cargo, Movable movable){

@@ -32,7 +32,7 @@ public class CarTransport implements IDirection, ITransportable, ICarCarrier, IT
 
     @Override
     public void load(ICar cargo) {
-        loadingPlatform.load(cargo, movable, movable.getX(), movable.getY());
+        loadingPlatform.load(cargo, movable, movable.getX(), movable.getY(), cargo.getX(), cargo.getY());
     }
 
     @Override
