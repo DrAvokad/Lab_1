@@ -192,5 +192,106 @@ public class TestObjects {
         workshop.unload();
         assertTrue(workshop.getSize() == 1);
     }
+
+    //----------Scania----------
+
+    @Test
+    public void testMoveEastScania (){
+        Scania scania = new Scania(0, 0, IDirection.Direction.SOUTH);
+        scania.startEngine();
+        scania.gas(1);
+        scania.move();
+        assertTrue(scania.getY() == 0 && scania.getX() > 0);
+    }
+
+    @Test
+    public void testMoveSouthScania(){
+        Scania scania = new Scania(0, 0, IDirection.Direction.SOUTH);
+        scania.startEngine();
+        scania.gas(1);
+        scania.turnRight();
+        scania.move();
+        assertTrue(scania.getY() > 0 && scania.getX() == 0);
+    }
+
+    @Test
+    public void testMoveNorth(){
+        Scania scania = new Scania(0, 0, IDirection.Direction.SOUTH);
+        scania.startEngine();
+        scania.gas(1);
+        scania.turnLeft();
+        scania.move();
+        assertTrue(scania.getY() < 0 && scania.getX() == 0);
+    }
+
+    @Test
+    public void testMoveWest(){
+        Scania scania = new Scania(0, 0, IDirection.Direction.SOUTH);
+        scania.startEngine();
+        scania.gas(1);
+        scania.turnLeft();
+        scania.turnLeft();
+        scania.move();
+        assertTrue(scania.getY() == 0 && scania.getX() < 0);
+    }
+
+    @Test
+    public void testMoveEastSouthWest(){
+        Scania scania = new Scania(0, 0, IDirection.Direction.SOUTH);
+        scania.startEngine();
+        scania.gas(1);
+        scania.move();
+        scania.turnRight();
+        scania.move();
+        scania.turnRight();
+        scania.move();
+        assertTrue(scania.getY() > 0 && scania.getX() == 0);
+    }
+
+
+    @Test
+    public void testMoveTurnleftTurnLeftUpaAndRightTwice(){
+        Scania scania = new Scania(0, 0, IDirection.Direction.SOUTH);
+        scania.startEngine();
+        scania.gas(1);
+        scania.turnLeft();
+        scania.turnLeft();
+        scania.move();
+        scania.turnRight();
+        scania.move();
+        scania.turnRight();
+        scania.move();
+        scania.move();
+        assertTrue(scania.getY() < 0 && scania.getX() > 0);
+    }
+
+    @Test
+    public void testMoveWithoutStartingEngine(){
+        Scania scania = new Scania(0, 0, IDirection.Direction.SOUTH);
+        scania.gas(1);
+        scania.move();
+        assertTrue(scania.getY() == 0 && scania.getX() == 0);
+
+    }
+
+    @Test
+    public void testStopEngine(){
+        Scania scania = new Scania(0, 0, IDirection.Direction.SOUTH);
+        scania.startEngine();
+        scania.gas(1);
+        scania.move();
+        scania.turnRight();
+        scania.stopEngine();
+        scania.move();
+        assertTrue(scania.getY() == 0 && scania.getX() > 0);
+
+    }
+
+    @Test
+    public void testNumberDoors(){
+        Scania scania = new Scania(0, 0, IDirection.Direction.SOUTH);
+        assertTrue(scania.getDoors() == 2);
+    }
+
 }
 
