@@ -36,4 +36,14 @@ public class Workshop<T extends ICar> implements IBuilding {
     public void closeWorkshop(){
         workarea.close();
     }
+
+    //----------Testing----------
+
+    public ICar getCar(int i){
+        return workarea.getCargo(i);
+    }
+
+    public int getSize(){
+        return workarea.getSize();
+    }
 }

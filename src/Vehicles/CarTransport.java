@@ -68,6 +68,21 @@ public class CarTransport implements IDirection, ITransportable, ICarCarrier, IT
     }
 
     @Override
+    public void move() {
+        movable.move();
+    }
+
+    @Override
+    public void turnLeft() {
+        movable.turnLeft();
+    }
+
+    @Override
+    public void turnRight() {
+        movable.turnRight();
+    }
+
+    @Override
     public void transport(Movable newMovable) {
 
     }
@@ -83,5 +98,23 @@ public class CarTransport implements IDirection, ITransportable, ICarCarrier, IT
     @Override
     public void exitTransport(){
         movable = new Movable(movable.getX(), movable.getY(), Direction.SOUTH);
+    }
+
+    //----------For Testing----------
+
+    public double getX(){
+        return movable.getX();
+    }
+
+    public double getY(){
+        return movable.getY();
+    }
+
+    public ICar getCar(int i){
+        return loadingPlatform.getCargo(i);
+    }
+
+    public int getSize(){
+        return loadingPlatform.getSize();
     }
 }

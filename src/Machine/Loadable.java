@@ -1,6 +1,7 @@
 package Machine;
 
 import Abstracts.Movable;
+import Vehicles.ICar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +43,14 @@ public class Loadable<T extends ITransportable>{
         return isOpen;
     }
 
+    public T getCargo(int i){
+        return load.get(i);
+    }
+
+    public int getSize(){
+        return load.size();
+    }
+
     //----------Setters----------
 
     public void setFiFo(boolean ToF){
@@ -78,7 +87,7 @@ public class Loadable<T extends ITransportable>{
             load.remove(0);
         }else if(!load.isEmpty() && isOpen && !fiFo){
             cargo = load.get(load.size()-1);
-            load.remove(load.size());
+            load.remove(load.size()-1);
         }
         cargo.exitTransport();
         return cargo;

@@ -10,5 +10,8 @@ public interface ICar extends ITransportable {
     void startEngine();
     void stopEngine();
     int getNrDoors();
+    void move();
+    void turnLeft();
+    void turnRight();
 
 }

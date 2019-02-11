@@ -9,5 +9,8 @@ public interface ITruck extends ITransportable {
     void startEngine();
     void stopEngine();
     int getDoors();
+    void move();
+    void turnLeft();
+    void turnRight();
 
 }

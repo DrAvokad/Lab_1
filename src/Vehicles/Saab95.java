@@ -58,6 +58,21 @@ public class Saab95 implements IDirection, ITransportable, ICar {
         return nrDoors;
     }
 
+    @Override
+    public void move() {
+        movable.move();
+    }
+
+    @Override
+    public void turnLeft() {
+        movable.turnLeft();
+    }
+
+    @Override
+    public void turnRight() {
+        movable.turnRight();
+    }
+
     public void setTurboOn(){
         turboOn = true;
     }
@@ -74,5 +89,15 @@ public class Saab95 implements IDirection, ITransportable, ICar {
     @Override
     public void exitTransport(){
         movable = new Movable(movable.getX(), movable.getY(), Direction.SOUTH);
+    }
+
+    //----------Testing----------
+
+    public double getX(){
+        return movable.getX();
+    }
+
+    public double getY(){
+        return movable.getY();
     }
 }
