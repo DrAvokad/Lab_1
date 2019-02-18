@@ -2,10 +2,7 @@ package Vehicles;
 
 import Abstracts.IDirection;
 import Abstracts.Movable;
-import Machine.Engine;
-import Machine.ICarCarrier;
-import Machine.ITransportable;
-import Machine.Loadable;
+import Machine.*;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -15,14 +12,14 @@ public class CarTransport implements IDirection, ITransportable, ICarCarrier, IT
     private final int nrDoors = 2;
     private Movable movable;
     private Vehicle vehicle;
-    private Loadable<ICar> loadingPlatform;
+    private Loadable<ITransportableByCarTransport> loadingPlatform;
     private Engine engine = new Engine(350);
 
     public CarTransport(double x, double y, Direction direction) {
 
         this.movable = new Movable(x, y, direction);
         this.vehicle = new Vehicle(Color.BLACK, "CarTransport");
-        this.loadingPlatform = new Loadable<>(8, 10, false, new ArrayList<ICar>());
+        this.loadingPlatform = new Loadable(8, 10, false, new ArrayList<ICar>());
     }
 
     double speedFactor() {
@@ -31,12 +28,12 @@ public class CarTransport implements IDirection, ITransportable, ICarCarrier, IT
 
 
     @Override
-    public void load(ICar cargo) {
+    public void load(ITransportableByCarTransport cargo) {
         loadingPlatform.load(cargo, movable, movable.getX(), movable.getY(), cargo.getX(), cargo.getY());
     }
 
     @Override
-    public ICar unload() {
+    public ITransportableByCarTransport unload() {
         return loadingPlatform.unload();
     }
 
@@ -102,15 +99,17 @@ public class CarTransport implements IDirection, ITransportable, ICarCarrier, IT
 
     //----------For Testing----------
 
+    @Override
     public double getX(){
         return movable.getX();
     }
 
+    @Override
     public double getY(){
         return movable.getY();
     }
 
-    public ICar getCar(int i){
+    public ITransportableByCarTransport getCar(int i){
         return loadingPlatform.getCargo(i);
     }
 

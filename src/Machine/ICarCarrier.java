@@ -4,6 +4,6 @@ import Vehicles.ICar;
 
 public interface ICarCarrier<T extends ITransportable> {
 
-    void load(ICar cargo);
-    ICar unload();
+    void load(ITransportableByCarTransport cargo);
+    ITransportableByCarTransport unload();
 }

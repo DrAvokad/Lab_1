@@ -1,5 +1,6 @@
 import Abstracts.IDirection;
 import Buildings.Workshop;
+import Machine.ITransportableByCarTransport;
 import Other.Ekollon;
 import Vehicles.*;
 import org.junit.Test;
@@ -123,7 +124,7 @@ public class TestObjects {
         Volvo240 rishögen = new Volvo240(50,50, IDirection.Direction.NORTH);
         Volvo240 rolfsKärra = new Volvo240(0,0, IDirection.Direction.NORTH);
         carTransport.operatePlatform();
-        ICar[] list = new ICar[8];
+        ITransportableByCarTransport[] list = new ITransportableByCarTransport [8];
         for (int i = 0; i < 8; i++){
             list[i] = new Saab95(0,0, IDirection.Direction.NORTH);
         }

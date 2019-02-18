@@ -4,10 +4,11 @@ import Abstracts.IDirection;
 import Abstracts.Movable;
 import Machine.Engine;
 import Machine.ITransportable;
+import Machine.ITransportableByCarTransport;
 
 import java.awt.*;
 
-public class Volvo240 implements IDirection, ITransportable, ICar {
+public class Volvo240 implements IDirection, ITransportableByCarTransport, ICar {
 
     private final int nrDoors = 4;
     private Engine engine = new Engine(100);

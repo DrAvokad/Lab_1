@@ -1,4 +1,6 @@
 package Vehicles;
 
-public interface IBoat {
+public interface IBoat extends IMotorvehicles {
+
+
 }
