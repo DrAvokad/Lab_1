@@ -1,7 +1,11 @@
+import Vehicles.Scania;
+
+import java.util.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -9,15 +13,21 @@ import javax.swing.*;
 
 public class DrawPanel extends JPanel{
 
-    // Just a single image, TODO: Generalize
     BufferedImage volvoImage;
+    BufferedImage saabImage;
+    BufferedImage ScaniaImage;
+
+
+    // Just a single image, TODO: Generalize
     // To keep track of a singel cars position
-    Point volvoPoint = new Point();
+    List <Point> points = new ArrayList<>();
+    List <String> imageList = new ArrayList<>();
 
     // TODO: Make this genereal for all cars
-    void moveit(int x, int y){
-        volvoPoint.x = x;
-        volvoPoint.y = y;
+    void moveit(ArrayList<Point> points, ArrayList<String> imageList){
+      this.points = points;
+      this.imageList = imageList;
+
     }
 
     // Initializes the panel and reads the images
@@ -33,11 +43,15 @@ public class DrawPanel extends JPanel{
 
             // Rememember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
             // if you are starting in IntelliJ.
+            saabImage= ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg"));
             volvoImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"));
+            ScaniaImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg"));
         } catch (IOException ex)
         {
             ex.printStackTrace();
         }
+
+
 
     }
 
@@ -46,6 +60,23 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(volvoImage, volvoPoint.x, volvoPoint.y, null); // see javadoc for more info on the parameters
+        //g.drawImage(imageList, points, null); // see javadoc for more info on the parameters
+
+        for (int i = 0; i < imageList.size(); i++ ){
+
+            if (imageList.get(i).equals("Saab95")) {
+
+                g.drawImage(saabImage, points.get(i).x, points.get(i).y, null);
+            }
+
+            else if (imageList.get(i).equals("Volvo240")){
+                g.drawImage(volvoImage, points.get(i).x, points.get(i).y, null);
+            }
+
+            else{
+                g.drawImage(ScaniaImage, points.get(i).x, points.get(i).y, null);
+            }
+        }
     }
+
 }

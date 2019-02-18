@@ -1,6 +1,8 @@
 package Vehicles;
 
-public interface IMotorvehicles {
+import Machine.ITransportable;
+
+public interface IMotorvehicles extends ITransportable {
 
     void gas(double amount);
     void brake(double amount);

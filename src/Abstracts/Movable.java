@@ -39,6 +39,7 @@ public class Movable implements IDirection {
         }else if (direction == Direction.WEST){
             position.setX(position.getX() - currentSpeed);
         }
+
     }
 
     public void turnLeft() {

@@ -5,12 +5,13 @@ import Abstracts.Movable;
 import Machine.Engine;
 import Machine.ITransportable;
 import Machine.ITransportableByCarTransport;
+import Machine.ITurbo;
 import Vehicles.ICar;
 import Vehicles.Vehicle;
 
 import java.awt.*;
 //extends Vehicle?
-public class Saab95 implements IDirection, ITransportableByCarTransport, ICar {
+public class Saab95 implements IDirection, ITransportableByCarTransport, ICar, ITurbo {
 
     private final int nrDoors = 2;
     private Engine engine = new Engine(125);

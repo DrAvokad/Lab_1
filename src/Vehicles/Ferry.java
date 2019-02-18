@@ -11,7 +11,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Ferry implements ILargeCarrier, IBoat {
+public class Ferry implements ILargeCarrier, IBoat  {
 
     private Movable movable;
     private Engine engine = new Engine(2500);
@@ -97,6 +97,16 @@ public class Ferry implements ILargeCarrier, IBoat {
     @Override
     public void turnRight() {
         movable.turnRight();
+    }
+
+    @Override
+    public void transport(Movable newMovable) {
+
+    }
+
+    @Override
+    public void exitTransport() {
+
     }
 
     public double getX() {
