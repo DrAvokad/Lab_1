@@ -3,11 +3,12 @@ package Vehicles;
 import Abstracts.IDirection;
 import Abstracts.Movable;
 import Machine.Engine;
+import Machine.IFlatbed;
 import Machine.ITransportable;
 
 import java.awt.*;
 
-public class Scania implements IDirection, ITransportable, ITruck {
+public class Scania implements IDirection, ITransportable, ITruck, IFlatbed {
 
     private Engine engine = new Engine(300);
     private final int nrDoors = 2;

@@ -68,7 +68,7 @@ public class Engine {
                 newSpeed = decrementSpeed(amount, currentSpeed, speedFactor);
             }
         }
-        if(currentSpeed < 0){
+        if(currentSpeed <= 0){
             return 0;
         }else{
             return newSpeed;

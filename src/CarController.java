@@ -1,4 +1,5 @@
 import Abstracts.IDirection;
+import Machine.IFlatbed;
 import Machine.ITurbo;
 import Vehicles.*;
 
@@ -30,6 +31,7 @@ public class CarController  {
     // A list of cars, modify if needed
     ArrayList<IMotorvehicles> cars = new ArrayList<>();
     ArrayList<ITurbo> turbos = new ArrayList<>();
+    ArrayList<IFlatbed> flatbeds = new ArrayList<>();
 
     //ArrayList<ITruck> trucks = new ArrayList<>();
 
@@ -44,8 +46,9 @@ public class CarController  {
         Saab95 saab =new Saab95(200, 0, IDirection.Direction.SOUTH);
         cc.cars.add(saab);
         cc.turbos.add(saab);
-        cc.cars.add(new Scania(400,0, IDirection.Direction.SOUTH));
-
+        Scania scania = new Scania(400,0, IDirection.Direction.SOUTH);
+        cc.cars.add(scania);
+        cc.flatbeds.add(scania);
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
 
@@ -121,8 +124,17 @@ public class CarController  {
         }
     }
 
+    void scaniaTiltUp(){
+        for (IFlatbed truck : flatbeds){
+            truck.tiltLoadingPlatform(1);
+        }
+    }
 
-
+    void scaniaTiltDown(){
+        for (IFlatbed truck : flatbeds){
+            truck.tiltLoadingPlatform(-1);
+        }
+    }
 
 }
 
