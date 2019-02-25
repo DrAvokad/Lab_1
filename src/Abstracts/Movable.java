@@ -67,7 +67,7 @@ public class Movable implements IDirection {
     }
 
     public double getX(){
-        return position.getX();
+      return position.getX();
     }
 
     public double getY(){
