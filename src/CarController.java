@@ -42,10 +42,10 @@ public class CarController  {
         // Instance of this class
         CarController cc = new CarController();
 
-        cc.cars.add(new Volvo240(0,0, IDirection.Direction.SOUTH));
-        Saab95 saab =new Saab95(200, 0, IDirection.Direction.SOUTH);
+        cc.cars.add(CarFactory.createVolvo240(0,0, IDirection.Direction.SOUTH));
+        ICar saab = CarFactory.createSaab95(200, 0, IDirection.Direction.SOUTH);
         cc.cars.add(saab);
-        cc.turbos.add(saab);
+        cc.turbos.add((Saab95)saab);
         Scania scania = new Scania(400,0, IDirection.Direction.SOUTH);
         cc.cars.add(scania);
         cc.flatbeds.add(scania);

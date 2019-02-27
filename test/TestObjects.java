@@ -17,13 +17,13 @@ public class TestObjects {
     public void testWorkshopStatic(){
         Workshop workshop = new Workshop<>(0, 0, 8, new ArrayList(8), "Workshoppe");
         workshop.openWorkshop();
-        Saab95 saab95 = new Saab95(0, 0 , IDirection.Direction.NORTH);
+        ICar saab95 = CarFactory.createSaab95(0, 0 , IDirection.Direction.NORTH);
         workshop.load(saab95);
         Ekollon ekollon = new Ekollon(1, 1);
        // workshop.load(ekollon);
         Scania scania = new Scania(1, 1, IDirection.Direction.NORTH);
        // workshop.load(scania);
-        Volvo240 volvo240 = new Volvo240(0, 0, IDirection.Direction.NORTH);
+        ICar volvo240 = CarFactory.createVolvo240(0, 0, IDirection.Direction.NORTH);
         workshop.load(volvo240);
     }
 
@@ -57,17 +57,17 @@ public class TestObjects {
     public void testWorkshopStaticDifferentCars(){
         Workshop<Volvo240> workshop = new Workshop(0, 0, 8, new ArrayList(8), "Workshoppe");
         workshop.openWorkshop();
-        Saab95 saab95 = new Saab95(0, 0 , IDirection.Direction.NORTH);
+        ICar saab95 = CarFactory.createSaab95(0, 0 , IDirection.Direction.NORTH);
         //workshop.load(saab95);
-        Volvo240 volvo240 = new Volvo240(0, 0, IDirection.Direction.NORTH);
-        workshop.load(volvo240);
+        ICar volvo240 = CarFactory.createVolvo240(0, 0, IDirection.Direction.NORTH);
+        workshop.load((Volvo240)volvo240);
     }
 
     @Test
     public void testCarTransportLoadSomeCarsClosed(){
         CarTransport carTransport = new CarTransport(0,0, IDirection.Direction.SOUTH);
-        Volvo240 volvo240 = new Volvo240(0, 0, IDirection.Direction.SOUTH);
-        carTransport.load(volvo240);
+        ICar volvo240 = CarFactory.createVolvo240(0, 0, IDirection.Direction.SOUTH);
+        carTransport.load((Volvo240)volvo240);
         out.println(carTransport.getCar(0));
         //out.println(carTransport.getCar(1));
     }
@@ -75,7 +75,7 @@ public class TestObjects {
     @Test
     public void testCarTransportLoadSomeCarsOpen(){
         CarTransport carTransport = new CarTransport(0,0, IDirection.Direction.SOUTH);
-        Volvo240 volvo240 = new Volvo240(0, 0, IDirection.Direction.SOUTH);
+        ICar volvo240 = CarFactory.createVolvo240(0, 0, IDirection.Direction.SOUTH);
         carTransport.operatePlatform();
         carTransport.load(volvo240);
         out.println(carTransport.getCar(0));
@@ -85,8 +85,8 @@ public class TestObjects {
     @Test
     public void testCarTransportTransportSomeCars(){
         CarTransport carTransport = new CarTransport(0,0, IDirection.Direction.SOUTH);
-        Volvo240 volvo240 = new Volvo240(0, 0, IDirection.Direction.SOUTH);
-        Saab95 saab95 = new Saab95(0, 0, IDirection.Direction.NORTH);
+        ICar volvo240 = CarFactory.createVolvo240(0, 0, IDirection.Direction.SOUTH);
+        ICar saab95 = CarFactory.createSaab95(0, 0, IDirection.Direction.NORTH);
         carTransport.operatePlatform();
         carTransport.load(volvo240);
         carTransport.load(saab95);
@@ -121,12 +121,12 @@ public class TestObjects {
     @Test
     public void testCarTransportMaxTransportandTestRange(){
         CarTransport carTransport = new CarTransport(0, 0, IDirection.Direction.EAST);
-        Volvo240 rishögen = new Volvo240(50,50, IDirection.Direction.NORTH);
-        Volvo240 rolfsKärra = new Volvo240(0,0, IDirection.Direction.NORTH);
+        ICar rishögen = CarFactory.createVolvo240(50,50, IDirection.Direction.NORTH);
+        ICar rolfsKärra = CarFactory.createVolvo240(0,0, IDirection.Direction.NORTH);
         carTransport.operatePlatform();
         ITransportableByCarTransport[] list = new ITransportableByCarTransport [8];
         for (int i = 0; i < 8; i++){
-            list[i] = new Saab95(0,0, IDirection.Direction.NORTH);
+            list[i] = CarFactory.createSaab95(0,0, IDirection.Direction.NORTH);
         }
         for (int i = 0; i < 8; i++){
             carTransport.load(list[i]);
@@ -149,7 +149,7 @@ public class TestObjects {
     public void testAddSaabToVolvoWorkshopStatic(){
         Workshop<Volvo240> workshop = new Workshop<Volvo240>(0, 0, 2, new ArrayList<Volvo240>(2), "shop");
         workshop.openWorkshop();
-        Saab95 saab95 = new Saab95(0, 0 , IDirection.Direction.NORTH);
+        ICar saab95 = CarFactory.createSaab95(0, 0 , IDirection.Direction.NORTH);
         //workshop.load(saab95);
     }
 
@@ -157,7 +157,7 @@ public class TestObjects {
     public void testAddSaabCarToWorkshop (){
         Workshop<ICar> workshop = new Workshop<ICar>(0, 0, 2, new ArrayList<ICar>(2), "shop");
         workshop.openWorkshop();
-        Saab95 saab95 = new Saab95(0, 0 , IDirection.Direction.NORTH);
+        ICar saab95 = CarFactory.createSaab95(0, 0 , IDirection.Direction.NORTH);
         workshop.load(saab95);
         assertTrue(workshop.getCar(0).equals(saab95));
     }
@@ -166,8 +166,8 @@ public class TestObjects {
     public void testAddVolvoCarToVolvoWorkshop (){
         Workshop<Volvo240> workshop = new Workshop<Volvo240>(0, 0, 2, new ArrayList<Volvo240>(2), "shop");
         workshop.openWorkshop();
-        Volvo240 volvo240 = new Volvo240(0, 0 , IDirection.Direction.NORTH);
-        workshop.load(volvo240);
+        ICar volvo240 = CarFactory.createVolvo240(0, 0 , IDirection.Direction.NORTH);
+        workshop.load((Volvo240)volvo240);
         assertTrue(workshop.getCar(0).equals(volvo240));
     }
 
@@ -175,8 +175,8 @@ public class TestObjects {
     public void testAddCarToFullWorkshop(){
         Workshop<ICar> workshop = new Workshop<>(0, 0, 1, new ArrayList<>(1), "shop");
         workshop.openWorkshop();
-        Saab95 saab95 = new Saab95(0, 0 , IDirection.Direction.NORTH);
-        Volvo240 volvo240 = new Volvo240(0,0, IDirection.Direction.EAST);
+        ICar saab95 = CarFactory.createSaab95(0, 0 , IDirection.Direction.NORTH);
+        ICar volvo240 = CarFactory.createVolvo240(0,0, IDirection.Direction.EAST);
         workshop.load(saab95);
         workshop.load(volvo240);
         assertTrue(workshop.getSize() == 1);
@@ -186,8 +186,8 @@ public class TestObjects {
     public void testUnloadCarFromWorkshop (){
         Workshop workshop = new Workshop<>(0, 0, 2, new ArrayList<>(2), "shop");
         workshop.openWorkshop();
-        Saab95 saab95 = new Saab95(0, 0 , IDirection.Direction.NORTH);
-        Volvo240 volvo240 = new Volvo240(0,0, IDirection.Direction.EAST);
+        ICar saab95 = CarFactory.createSaab95(0, 0 , IDirection.Direction.NORTH);
+        ICar volvo240 = CarFactory.createVolvo240(0,0, IDirection.Direction.EAST);
         workshop.load(saab95);
         workshop.load(volvo240);
         workshop.unload();

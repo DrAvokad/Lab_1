@@ -20,7 +20,7 @@ public class Saab95 implements IDirection, ITransportableByCarTransport, ICar, I
     private Movable movable;
 
 
-    public Saab95(double x, double y, Direction direction) {
+    Saab95(double x, double y, Direction direction) {
 
         this.movable = new Movable(x, y, direction);
         this.vehicle = new Vehicle(Color.RED, "Saab95");

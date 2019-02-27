@@ -16,7 +16,7 @@ public class Volvo240 implements IDirection, ITransportableByCarTransport, ICar 
     private Movable movable;
     private Vehicle vehicle;
 
-    public Volvo240(double x, double y, Direction direction) {
+    Volvo240(double x, double y, Direction direction) {
 
         this.movable = new Movable(x, y, direction);
         this.vehicle = new Vehicle(Color.BLACK, "Volvo240");
