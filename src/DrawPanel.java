@@ -11,7 +11,7 @@ import javax.swing.*;
 
 // This panel represent the animated part of the view with the car images.
 
-public class DrawPanel extends JPanel{
+public class DrawPanel extends JPanel implements IActionListner{
 
     BufferedImage volvoImage;
     BufferedImage saabImage;
@@ -79,4 +79,9 @@ public class DrawPanel extends JPanel{
         }
     }
 
+    @Override
+    public void actOnUpdate() {
+
+        moveit(points, imageList);
+    }
 }
