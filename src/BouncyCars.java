@@ -20,16 +20,18 @@ public class BouncyCars {
         carModel.cars.add(scania);
         carModel.flatbeds.add(scania);
 
-        DrawPanel view = new DrawPanel(carModel, 800, 560);
-        CarView frame = new CarView("CarSim 1.0", carModel);
-        CarController cc = new CarController(carModel, frame);
+        //DrawPanel view = new DrawPanel(carModel, 800, 560);
+        CarController cc = new CarController(carModel);
+        DrawView cv = new DrawView(carModel, "Gräsmattan", 800, 560 );
 
-        JFrame fram3 = new JFrame();
+        /*JFrame fram3 = new JFrame();
         fram3.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         fram3.add(view);
         fram3.pack();
         fram3.setVisible(true);
+*/
 
+        carModel.addObserver(cv);
         // Start the timer
         carModel.timer.start();
     }

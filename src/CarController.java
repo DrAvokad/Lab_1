@@ -11,6 +11,8 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import static java.lang.System.out;
+
 /*
  * This class represents the Controller part in the MVC pattern.
  * It's responsibilities is to listen to the View and responds in a appropriate manner by
@@ -22,16 +24,15 @@ public class CarController  {
 
     CarModel carModel;
     CarView frame;
+    ArrayList<String> carList;
 
-    public CarController(CarModel model, CarView frame){
-        this.frame = frame;
+    public CarController(CarModel model){
+        this.frame = new CarView("SuperController5Million");
         carModel = model;
 
         frame.gasButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                carModel.gas(frame.gasAmount);
-            }
+            public void actionPerformed(ActionEvent e) { carModel.gas(frame.gasAmount); }
         });
 
         frame.startButton.addActionListener(new ActionListener() {
@@ -80,6 +81,22 @@ public class CarController  {
             @Override
             public void actionPerformed(ActionEvent e) {
                 carModel.scaniaTiltDown();
+            }
+        });
+
+        frame.removeCarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carModel.removeCar();
+            }
+        });
+
+        frame.addCarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String name = (String) frame.carSpinner.getValue();
+                out.println(name);
+                carModel.addCar(name);
             }
         });
     }

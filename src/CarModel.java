@@ -1,8 +1,7 @@
+import Abstracts.IDirection;
 import Machine.IFlatbed;
 import Machine.ITurbo;
-import Vehicles.CarFactory;
-import Vehicles.IMotorvehicles;
-import Vehicles.Saab95;
+import Vehicles.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,9 +34,6 @@ public class CarModel {
 
             for (IMotorvehicles car : cars) {
                 car.move();
-                int x = (int) Math.round(car/*.getPosition()*/.getX());
-                int y = (int) Math.round(car/*.getPosition()*/.getY());
-                points.add(new Point(x,y));
                 if (car.getY() > 500 || car.getY() < 0){
                     car.turnRight();
                     car.turnRight();
@@ -100,6 +96,33 @@ public class CarModel {
     void scaniaTiltDown(){
         for (IFlatbed truck : flatbeds){
             truck.tiltLoadingPlatform(-1);
+        }
+    }
+
+    void addCar(String cartype){
+        double x = cars.get(cars.size()-1).getX()+200;
+        double y = cars.get(cars.size()-1).getY();
+        switch (cartype){
+            case "Volvo240":
+                cars.add(CarFactory.createVolvo240(x, y, IDirection.Direction.SOUTH));
+                break;
+            case "Saab95":
+                IMotorvehicles saab = CarFactory.createSaab95(x, y, IDirection.Direction.SOUTH);
+                cars.add(saab);
+                turbos.add((Saab95)saab);
+                break;
+            case "Scania":
+                IMotorvehicles scania = CarFactory.createScania(x, y, IDirection.Direction.SOUTH);
+                cars.add(scania);
+                flatbeds.add((Scania)scania);
+        }
+    }
+
+    void removeCar() {
+        if (cars.size() == 0) {
+
+        } else {
+            cars.remove(cars.size() - 1);
         }
     }
 

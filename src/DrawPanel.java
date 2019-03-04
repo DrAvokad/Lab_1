@@ -32,6 +32,7 @@ public class DrawPanel extends JPanel implements IActionListner{
         }
         for (IMotorvehicles m : cModel.cars){
           Point carPosition = new Point((int)Math.round(m.getX()), (int)Math.round(m.getY()));
+          positions.add(carPosition);
       }
     }
 
