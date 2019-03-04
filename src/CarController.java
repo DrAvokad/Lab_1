@@ -20,8 +20,12 @@ import java.util.ArrayList;
 public class CarController  {
     // member fields:
 
-    public CarController(CarView frame){
+    CarModel carModel;
+    CarView frame;
+
+    public CarController(CarModel model, CarView frame){
         this.frame = frame;
+        carModel = model;
 
         frame.gasButton.addActionListener(new ActionListener() {
             @Override
@@ -81,8 +85,7 @@ public class CarController  {
     }
 
     // The frame that represents this instance View of the MVC pattern
-    CarModel carModel;
-    CarView frame;
+
 
 
 

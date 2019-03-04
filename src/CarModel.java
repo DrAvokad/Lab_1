@@ -16,7 +16,7 @@ public class CarModel {
     private final int delay = 50;
     // The timer is started with an listener (see below) that executes the statements
     // each step between delays.
-    private Timer timer = new Timer(delay, new TimerListener());
+    Timer timer = new Timer(delay, new TimerListener());
 
     // A list of cars, modify if needed
     ArrayList<IMotorvehicles> cars = new ArrayList<>();
@@ -32,14 +32,12 @@ public class CarModel {
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             ArrayList<Point> points = new ArrayList<>();
-            ArrayList<String> imageList = new ArrayList<>();
 
             for (IMotorvehicles car : cars) {
                 car.move();
                 int x = (int) Math.round(car/*.getPosition()*/.getX());
                 int y = (int) Math.round(car/*.getPosition()*/.getY());
                 points.add(new Point(x,y));
-                imageList.add(car.getClass().getSimpleName());
                 if (car.getY() > 500 || car.getY() < 0){
                     car.turnRight();
                     car.turnRight();

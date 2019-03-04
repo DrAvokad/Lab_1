@@ -1,3 +1,4 @@
+import Vehicles.IMotorvehicles;
 import Vehicles.Scania;
 
 import java.util.*;
@@ -17,21 +18,26 @@ public class DrawPanel extends JPanel implements IActionListner{
     BufferedImage saabImage;
     BufferedImage ScaniaImage;
 
+    private CarModel cModel;
 
     // Just a single image, TODO: Generalize
     // To keep track of a singel cars position
-    List <Point> points = new ArrayList<>();
-    List <String> imageList = new ArrayList<>();
+    List <Point> positions = new ArrayList<>();
+    List <String> vehicles = new ArrayList<>();
 
     // TODO: Make this genereal for all cars
-    void moveit(ArrayList<Point> points, ArrayList<String> imageList){
-      this.points = points;
-      this.imageList = imageList;
-
+    void getPositions(){
+        if(positions.size() > 0){
+            positions.clear();
+        }
+        for (IMotorvehicles m : cModel.cars){
+          Point carPosition = new Point((int)Math.round(m.getX()), (int)Math.round(m.getY()));
+      }
     }
 
     // Initializes the panel and reads the images
-    public DrawPanel(int x, int y) {
+    public DrawPanel(CarModel model, int x, int y) {
+        cModel = model;
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.green);
@@ -46,13 +52,16 @@ public class DrawPanel extends JPanel implements IActionListner{
             saabImage= ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg"));
             volvoImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"));
             ScaniaImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg"));
+
         } catch (IOException ex)
         {
             ex.printStackTrace();
         }
-
-
-
+        for(IMotorvehicles m : cModel.cars){
+            vehicles.add(m.getClass().getSimpleName());
+            positions.add(new Point((int) m.getX(),(int) m.getY()));
+        }
+        setVisible(true);
     }
 
     // This method is called each time the panel updates/refreshes/repaints itself
@@ -62,26 +71,56 @@ public class DrawPanel extends JPanel implements IActionListner{
         super.paintComponent(g);
         //g.drawImage(imageList, points, null); // see javadoc for more info on the parameters
 
-        for (int i = 0; i < imageList.size(); i++ ){
+        for (int i = 0; i < vehicles.size(); i++ ){
 
-            if (imageList.get(i).equals("Saab95")) {
+            if (vehicles.get(i).equals("Saab95")) {
 
-                g.drawImage(saabImage, points.get(i).x, points.get(i).y, null);
+                g.drawImage(saabImage, positions.get(i).x, positions.get(i).y, null);
             }
 
-            else if (imageList.get(i).equals("Volvo240")){
-                g.drawImage(volvoImage, points.get(i).x, points.get(i).y, null);
+            else if (vehicles.get(i).equals("Volvo240")){
+                g.drawImage(volvoImage, positions.get(i).x, positions.get(i).y, null);
             }
 
             else{
-                g.drawImage(ScaniaImage, points.get(i).x, points.get(i).y, null);
+                g.drawImage(ScaniaImage, positions.get(i).x, positions.get(i).y, null);
             }
+        }
+    }
+
+
+    /*
+    @Override
+    public void paint(Graphics g){
+        for (int i = 0; i < vehicles.size(); i++ ){
+
+            if (vehicles.get(i).equals("Saab95")) {
+
+                g.drawImage(saabImage, positions.get(i).x, positions.get(i).y, null);
+            }
+
+            else if (vehicles.get(i).equals("Volvo240")){
+                g.drawImage(volvoImage, positions.get(i).x, positions.get(i).y, null);
+            }
+
+            else{
+                g.drawImage(ScaniaImage, positions.get(i).x, positions.get(i).y, null);
+            }
+        }
+    }
+
+*/
+    private void updateVehicles(){
+        vehicles.clear();
+        for (IMotorvehicles m : cModel.cars){
+            vehicles.add(m.getClass().getSimpleName());
         }
     }
 
     @Override
     public void actOnUpdate() {
 
-        moveit(points, imageList);
+        getPositions();
+        repaint();
     }
 }
