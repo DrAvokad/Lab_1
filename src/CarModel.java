@@ -8,6 +8,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Random;
+
+import static java.lang.System.out;
 
 public class CarModel {
 
@@ -19,8 +22,8 @@ public class CarModel {
 
     // A list of cars, modify if needed
     ArrayList<IMotorvehicles> cars = new ArrayList<>();
-    ArrayList<ITurbo> turbos = new ArrayList<>();
-    ArrayList<IFlatbed> flatbeds = new ArrayList<>();
+    //ArrayList<ITurbo> turbos = new ArrayList<>();
+    //ArrayList<IFlatbed> flatbeds = new ArrayList<>();
 
 
     //ArrayList<ITruck> trucks = new ArrayList<>();
@@ -71,8 +74,23 @@ public class CarModel {
         }
     }
 
+    void turboOn(){
+        for (IMotorvehicles c : cars){
+            if(c instanceof ITurbo){
+                ((ITurbo) c).setTurboOn();
+            }
+        }
+    }
 
-    void saabTurboOn(){
+    void turboOff(){
+        for (IMotorvehicles c : cars){
+            if(c instanceof ITurbo){
+                ((ITurbo) c).setTurboOff();
+            }
+        }
+    }
+
+    /*void saabTurboOn(){
         for (ITurbo car : turbos){
             Saab95 saab = (Saab95) car;
             saab.setTurboOn();
@@ -80,12 +98,14 @@ public class CarModel {
         }
     }
 
+
     void saabTurboOff(){
         for (ITurbo car : turbos){
             Saab95 saab = (Saab95) car;
             saab.setTurboOff();
         }
     }
+
 
     void scaniaTiltUp(){
         for (IFlatbed truck : flatbeds){
@@ -98,30 +118,50 @@ public class CarModel {
             truck.tiltLoadingPlatform(-1);
         }
     }
+*/
 
+    void lowerFlatbed(){
+        for (IMotorvehicles c : cars){
+            if(c instanceof IFlatbed){
+                ((IFlatbed) c).tiltLoadingPlatform(1);
+            }
+        }
+    }
+
+    void liftFlatbed(){
+        for (IMotorvehicles c : cars){
+            if(c instanceof IFlatbed){
+                ((IFlatbed) c).tiltLoadingPlatform(-1);
+            }
+        }
+    }
     void addCar(String cartype){
-        double x = cars.get(cars.size()-1).getX()+200;
-        double y = cars.get(cars.size()-1).getY();
+        double x = 0;
+        double y = 0;
+        if(cars.size() > 0) {
+            x = cars.get(cars.size() - 1).getX() + 200;
+            y = cars.get(cars.size() - 1).getY();
+        }
         switch (cartype){
             case "Volvo240":
                 cars.add(CarFactory.createVolvo240(x, y, IDirection.Direction.SOUTH));
                 break;
             case "Saab95":
-                IMotorvehicles saab = CarFactory.createSaab95(x, y, IDirection.Direction.SOUTH);
-                cars.add(saab);
-                turbos.add((Saab95)saab);
+                cars.add(CarFactory.createSaab95(x, y, IDirection.Direction.SOUTH));
                 break;
             case "Scania":
-                IMotorvehicles scania = CarFactory.createScania(x, y, IDirection.Direction.SOUTH);
-                cars.add(scania);
-                flatbeds.add((Scania)scania);
+                cars.add(CarFactory.createScania(x, y, IDirection.Direction.SOUTH));
+                break;
+            case "Random":
+                Random rand = new Random();
+                String[] cars = {"Volvo240", "Saab95", "Scania"};
+                addCar(cars[rand.nextInt(3)]);
+                break;
         }
     }
 
     void removeCar() {
-        if (cars.size() == 0) {
-
-        } else {
+        if (cars.size() > 0) {
             cars.remove(cars.size() - 1);
         }
     }

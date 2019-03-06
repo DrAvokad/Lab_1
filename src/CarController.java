@@ -26,8 +26,8 @@ public class CarController  {
     CarView frame;
     ArrayList<String> carList;
 
-    public CarController(CarModel model){
-        this.frame = new CarView("SuperController5Million");
+    public CarController(CarModel model, CarView view){
+        this.frame = view;
         carModel = model;
 
         frame.gasButton.addActionListener(new ActionListener() {
@@ -59,28 +59,28 @@ public class CarController  {
         frame.turboOnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carModel.saabTurboOn();
+                carModel.turboOn();
             }
         });
 
         frame.turboOffButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carModel.saabTurboOff();
+                carModel.turboOff();
             }
         });
 
         frame.liftBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carModel.scaniaTiltUp();
+                carModel.liftFlatbed();
             }
         });
 
         frame.lowerBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carModel.scaniaTiltDown();
+                carModel.lowerFlatbed();
             }
         });
 

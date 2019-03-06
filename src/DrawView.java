@@ -14,7 +14,7 @@ public class DrawView extends JFrame implements IActionListner{
 
     public DrawView(CarModel carModel, String title, int x, int y){
         this.cPanel = new CarPanel(carModel, x, y);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         add(cPanel);
         pack();
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
